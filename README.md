@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://capsule-render.vercel.app/render?type=waving&color=auto&height=200&section=header&text=School%20Fees%20System&fontSize=70" width="100%">
+  <img src="https://drive.google.com/file/d/10hXyjedFZaCUroqN81V7XDttUgNCV3sf/view" width="100%">
 </p>
 
 # <p align="center">🎓 School Fees Management System</p>
