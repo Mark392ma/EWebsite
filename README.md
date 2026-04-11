@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://postimg.cc/qtBk3kYG" width="100%">
+  <img src="https://github.com/Mark392ma/EWebsite/blob/main/undefined.png" width="100%">
 </p>
 
 # <p align="center">🎓 School Fees Management System</p>
