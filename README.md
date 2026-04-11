@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://codeastro.com/wp-content/uploads/2021/07/Code-Astro-Thumbnail_Fees-Management-PHP.jpg" width="100%">
+  <img src="https://postimg.cc/qtBk3kYG" width="100%">
 </p>
 
 # <p align="center">🎓 School Fees Management System</p>
