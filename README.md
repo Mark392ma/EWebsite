@@ -4,7 +4,10 @@
 
 # <p align="center">🎓 School Fees Management System</p>
 
-🌟 A robust, full-stack solution designed to streamline educational financial tracking. Built with a modern monolithic approach using Laravel and React, this system ensures real-time fee processing, dynamic reporting, and a seamless user experience for administrators and parents alike.
+> [!IMPORTANT]
+> **Status:** 🏗️ Under Development. This project is currently being built and refined. Features are subject to change.
+
+🌟 A robust, full-stack solution designed to streamline educational financial tracking. Built with a modern monolithic approach using Laravel and React, this system ensures real-time fee processing, dynamic reporting, and a seamless user experience.
 
 ---
 
@@ -14,6 +17,41 @@
 
 * 💳 **Automated Invoicing:** Generate and send fee structures automatically.
 * 📊 **Data Visualization:** Interactive financial analytics powered by **Recharts**.
+* ⚡ **Modern Stack:** Seamless SPA feel using **Inertia.js** without the complexity of a separate API.
+* 🗄️ **Local Database:** Optimized for local development using **XAMPP (MySQL/MariaDB)**.
+* ✨ **Responsive UI:** Crafted with **Tailwind CSS** for a mobile-first experience.
+
+### 🌟 Development Status:
+
+[<img src="https://img.shields.io/badge/Status-Under_Development-orange?style=for-the-badge&logo=gitbook&logoColor=white">](#)
+[<img src="https://img.shields.io/badge/Database-XAMPP_MySQL-FBAD00?style=for-the-badge&logo=xampp&logoColor=white">](#)
+
+---
+
+### 📚 Frameworks & Tools Used
+
+<p align="left">
+  <img src="https://skillicons.dev/icons?i=laravel,php,react,js,tailwind,mysql,xampp,vite,github,vscode,postman&perline=6" />
+</p>
+
+---
+
+### 💻 Tech Stack Detail:
+
+![Laravel](https://img.shields.io/badge/laravel-%23FF2D20.svg?style=for-the-badge&logo=laravel&logoColor=white)
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![Inertia.js](https://img.shields.io/badge/Inertia.js-9553E9?style=for-the-badge&logo=inertia&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![XAMPP](https://img.shields.io/badge/XAMPP-FBAD00?style=for-the-badge&logo=xampp&logoColor=white)
+![Recharts](https://img.shields.io/badge/Recharts-222222?style=for-the-badge&logo=recharts&logoColor=white)
+
+---
+
+### 🚀 Local Development Setup (XAMPP)
+
+1. **Clone the repo:**
+   ```bash
+   git clone [https://github.com/yourusername/school-fees-system.git](https://github.com/yourusername/school-fees-system.git)
 * ⚡ **Modern Stack:** Seamless SPA feel using **Inertia.js** without the complexity of a separate API.
 * 🛡️ **Secure Payments:** Integrated tracking of balances, overpayments, and receipts.
 * ✨ **Responsive UI:** Crafted with **Tailwind CSS** for a mobile-first experience.
