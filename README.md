@@ -1,6 +1,6 @@
-# EWebsite
+# Fee Management System 
 
-A commercial website built using Laravel and React.
+A Fee management system database built using Laravel and React.
 
 ## Tech Stack
 - Laravel
