@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://imgur.com/a/KWMRvX1" width="100%">
+  <img src="https://www.google.com/imgres?q=fee%20management%20system%20database%20design&imgurl=https%3A%2F%2Fvedmarg.com%2Fwp-content%2Fuploads%2F2023%2F04%2Fstudent-fee-management-system.jpeg&imgrefurl=https%3A%2F%2Fvedmarg.com%2Fset-up-fee-structure-in-student-fee-management-system%2F&docid=DbH39PqOFacUbM&tbnid=zaXPW3Ab6h2Z-M&vet=12ahUKEwiU5fHn2-WTAxV3gf0HHUPZOicQnPAOegQIYRAB..i&w=1424&h=713&hcb=2&ved=2ahUKEwiU5fHn2-WTAxV3gf0HHUPZOicQnPAOegQIYRAB" width="100%">
 </p>
 
 # <p align="center">🎓 School Fees Management System</p>
