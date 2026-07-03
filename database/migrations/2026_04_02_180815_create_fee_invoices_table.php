@@ -11,12 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fee_invoices', function (Blueprint $table) {
+        Schema::create('invoices', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('student_id')->constrained()->casacadeOnDelete();
-            $table->foreignId('fee_allocation_id')->constrained()->casacadeOnDelete();
-            $table->decimal('total_amount', 10,2);
-            $table->decimal('paid_amount', 10,2);
+            $table->string('invoice_number')->unique(); 
+            $table->foreignId('student_id')->constrained('students')->cascadeOnDelete();
+            $table->string('description')->nullable(); 
+            $table->foreignId('fee_setup_id')->constrained()->cascadeOnDelete();
+            $table->decimal('amount_due', 10,2);
+            $table->decimal('amount_paid', 10,2)->default(0);
+            $table->decimal('balance', 10,2)->default(0);
             $table->date('due_date');
             $table->enum('status', ['paid', 'partial', 'pending']);
             $table->timestamps();

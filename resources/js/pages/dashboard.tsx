@@ -6,38 +6,75 @@ import AppLayout from '@/layouts/app-layout';
 import { formartCurreny } from '@/lib/utils';
 import { type BreadcrumbItem } from '@/types';
 import { Head, Link } from '@inertiajs/react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import { AlertTriangle, ArrowUpRight, CreditCard, DollarSign, User, Wallet } from 'lucide-react';
-
+import { ValueType, NameType } from 'recharts/types/component/DefaultTooltipContent';
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Welcome back, Mark',
         href: '/dashboard',
     },
 ];
+type DashboardSummary = {
+  totalStudents: number;
+  totalFees: number;
+  totalCollected: number;
+  outstandingFees: number;
+  overdueInvoices: number;
+  collectedThisMonth: number;
+  pendingPayments: number;
+};
 
-export default function Dashboard() {
-    //const { data: summary, isLoading: loadingSummary } = useDashboardSummary();
-    //const { data: trend, isLoading: loadingSummary } = useDashboardSummary();
-    //const { data: breakdown, isLoading: loadingBreakdown } = useGetPaymentMethodBreakdown;
+type TrendItem = {
+  month: string;
+  collected: number;
+  outstanding: number;
+};
+
+type BreakdownItem = {
+  method: string;
+  amount: number;
+};
+
+export default function Dashboard({
+    summary,
+    trend,
+    breakdown,
+    }: {
+    summary: DashboardSummary;
+    trend: TrendItem[];
+    breakdown: BreakdownItem[];
+    }) {
+        console.log('Trend:', trend)
+        console.log('Summary:', summary)
+        console.log('Breakdown:', breakdown)
+
+        const safeSummary: DashboardSummary = summary ?? {
+            totalStudents: 0,
+            totalFees: 0,
+            totalCollected: 0,
+            outstandingFees: 0,
+            overdueInvoices: 0,
+            collectedThisMonth: 0,
+            pendingPayments: 0,
+        };
 
     const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8']
-    // if (loadingSummary || !summary){
-    //     return (
-    //         <div className='space-y-6'>
-    //             <h1 className='yest-3xl font-bld tracking-tight'>Dashboard</h1>
-    //             <div className='grid gap-4 md:grid-cols-2 lg:grid-cols-4'>
-    //                 {[ ...Array(4)].map((_, i) => (
-    //                     <Card key={i}>
-    //                         <CardContent className='p-6'>
-    //                             <Skeleton className='h-20 w-full'></Skeleton>
-    //                         </CardContent>
-    //                     </Card>
-    //                 ))}
-    //             </div>
-    //         </div>
-    //     )
-    // }
+    const data = [
+        { name: 'Jan', uv: 1250, pv: 2500, amt: 3500},
+        { name: 'Feb', uv: 1380, pv: 2700, amt: 6000},
+        { name: 'Mar', uv: 1450, pv: 1000, amt: 4000},
+        { name: 'Apr', uv: 1750, pv: 1255, amt: 3890},
+        { name: 'May', uv: 1050, pv: 1500, amt: 4130},
+        { name: 'Jun', uv: 1950, pv: 3000, amt: 8970},
+        { name: 'Jul', uv: 2700, pv: 5000, amt: 5430},
+
+    ];
+    const pie_data = [
+        { method: 'Bank', amount: 70000},
+        { method: 'Mpesa', amount: 55000},
+
+    ]
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Fee Management" />
@@ -64,15 +101,14 @@ export default function Dashboard() {
                             <div className='text-2xl font-bold'>
                                 {
                                   formartCurreny(
-                                    //ReportSummary.totalFeesCollected
-                                    180000
+                                        safeSummary.totalFees
                                     )
                                 }
                             </div>
                             <p className='text-xs text-muted-foreground mt-1'>
                                 of {
-                                //summary.overdueInvoices
-                                80
+                                    safeSummary.overdueInvoices
+                                
                                 } total enrolled
                             </p>
                         </CardContent>
@@ -86,15 +122,13 @@ export default function Dashboard() {
                         <CardContent>
                             <div className='text-2xl font-bold'>
                                 { formartCurreny(
-                                    //ReportSummary.totalFeesCollected
-                                    150000
+                                    safeSummary.totalCollected
                                     )}
                             </div>
                             <p className='text-xs text-muted-foreground flex items-center gap-1 mt-1'>
                                 <span className='text-emerald-500 flex items-center'>
                                     <ArrowUpRight className='h-3 w-3' /> +{formartCurreny(
-                                        //ReportSummary.paidThisMonth
-                                        53000
+                                        safeSummary.collectedThisMonth
                                         )}
                                 </span>
                                 this month
@@ -110,14 +144,12 @@ export default function Dashboard() {
                         <CardContent>
                             <div className='text-2xl font-bold text-destructive'>
                                 { formartCurreny(
-                                    //summary.OutstandingFees
-                                    85000
+                                    safeSummary.outstandingFees
                                     )}
                             </div>
                             <p className='text-xs text-muted-foreground mt-1'>
                                 Across {
-                                //summary.overdueInvoices
-                                50
+                                safeSummary.overdueInvoices
                                 } overdue invoices
                             </p>
                         </CardContent>
@@ -131,8 +163,7 @@ export default function Dashboard() {
                         <CardContent>
                             <div className='text-2xl font-bold'>
                                 { formartCurreny(
-                                    //summary.pendingPayments
-                                    25000
+                                    safeSummary.pendingPayments
                                     )}
                             </div>
                             <p className='text-xs text-muted-foreground mt-1'>
@@ -148,26 +179,38 @@ export default function Dashboard() {
                             <CardTitle>Collection Trend</CardTitle>
                         </CardHeader>
                         <CardContent className='pl-2'>
-                            {/* {loadindTrend ? <Skeleton className='h-[300px] w-full' /> : (
-                                <ResponsiveContainer width="100%" height={300}>
-                                    <BarChart data={trend}>
-                                        <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                                        <XAxis datakey="month" tickline={false} axisLine={false} />
-                                        <YAxis
-                                            tickFormatter={(value) => `Ksh ${value/1000}k`}
-                                            ticklLine={false}
-                                            axisLine={false}
-                                            />
-                                        <Tooltip
-                                            formtter={(value: number) => formatCurrency(value)}
-                                            cursor={{fill: 'transparent'}}
+                            <ResponsiveContainer width="100%" height={300}>
+                                 <BarChart data={data}>
+                                    <CartesianGrid strokeDasharray="3 3" />
+
+                                    <XAxis
+                                        dataKey="name"
                                         />
-                                        <Legend />
-                                        <Bar datakey='collected' name="collected" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
-                                        <Bar datakey='outstanding' name="outstanding" fill="hsl(var(--destructive))" radius={[4, 4, 0, 0]} />
-                                    </BarChart>
-                                </ResponsiveContainer>
-                            )} */}
+
+                                    <YAxis
+                                        tickFormatter={(value) => `Ksh ${value / 1000}k`}
+                                        />
+
+                                    <Tooltip/>
+
+                                    <Legend />
+
+                                    <Bar
+                                        dataKey="uv"
+                                        name="Collected"
+                                        fill='#2563EB'
+                                        radius={[4, 4, 0, 0]}
+                                        />
+
+                                    <Bar
+                                        dataKey="pv"
+                                        fill='#1E40AF'
+                                        name="Outstanding"
+                                        radius={[4, 4, 0, 0]}
+                                        />
+                                </BarChart>
+                            </ResponsiveContainer> 
+                       
                         </CardContent>
                     </Card>
 
@@ -176,28 +219,28 @@ export default function Dashboard() {
                             <CardTitle>Payment Method</CardTitle>
                         </CardHeader>
                         <CardContent>
-                            {/* {loadingBreakdown ? <Skeleton className='h-[300px] w-full' /> : (
-                                <ResponsiveContainer width="100%" height={300}>
+                            <ResponsiveContainer width="100%" height={300}>
                                     <PieChart>
-                                        <Pie 
-                                            data={breakdown}
-                                            cx="50%"
-                                            cy="50%"
-                                            innerRadius={60}
-                                            outerRadius={80}
-                                            paddingAngle={5}
-                                            dataKey="amount"
-                                            nameKey="method"
+                                        <Pie
+                                        data={pie_data}
+                                        dataKey="amount"
+                                        nameKey="method"
+                                        label
                                         >
-                                            {breakdowwn?.mao((entry, index) => (
-                                                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                                            ))}
+                                        {pie_data.map((entry, index) => (
+                                            <Cell
+                                            key={`cell-${index}`}
+                                            fill={COLORS[index % COLORS.length]}
+                                            />
+                                        ))}
                                         </Pie>
-                                        <Tooltip formatter={(Value: number) => formartCurreny(value)} />
+
+                                        <Tooltip/>
+
                                         <Legend />
                                     </PieChart>
-                                </ResponsiveContainer>
-                            )} */}
+                                    </ResponsiveContainer>
+                       
                         </CardContent>
                     </Card>
                 </div>

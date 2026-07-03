@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('stream', function (Blueprint $table) {
+
+        Schema::create('streams', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('class_id')->constrained('classes')->cascadeOnDelete();
+            $table->string('stream');
             $table->timestamps();
         });
     }
@@ -22,6 +25,12 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('stream');
+        Schema::table('streams', function (Blueprint $table) {
+            $table::dropForeign(['class_id']);
+            $table::dropColumn(['class_id']);
+
+        });
+            Schema::dropIfExists('streams');
+
     }
 };

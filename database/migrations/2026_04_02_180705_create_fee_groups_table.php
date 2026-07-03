@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('fee_groups', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->json('fee_type');
+            $table->string('description');
             $table->timestamps();
         });
         Schema::create('fee_group_type', function (Blueprint $table) {
-            $table->foreignId('fee_group_id')->constrains()->cascadeOnDelete();
-            $table->foreignId('fee_type_id')->constrains()->cascadeOnDelete();
+            $table->foreignId('fee_group_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('fee_type_id')->constrained()->cascadeOnDelete();
         });
         Schema::create('fee_group_student', function (Blueprint $table) {
             $table->foreignId('fee_group_id')->constrains()->cascadeOnDelete();
@@ -32,6 +32,8 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('fee_group_student');
+        Schema::dropIfExists('fee_group_type');
         Schema::dropIfExists('fee_groups');
     }
 };

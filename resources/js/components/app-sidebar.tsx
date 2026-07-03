@@ -4,25 +4,29 @@ import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type MainNavItem, type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { Banknote, BarChart, Bell, BookOpen, CreditCard, File, Folder, FolderArchive, LayoutGrid, Mail, MessageSquare, Receipt, Settings, Tag, User, User2 } from 'lucide-react';
+import { BarChart, Bell, BellIcon, CircleDollarSign, File, FolderArchive, GraduationCap, Home, Receipt, Send, Settings, Tag, User } from 'lucide-react';
 import AppLogo from './app-logo';
 import { FeesNav } from './collapse-nav';
+import { AppSidebarActions } from './app-sidebar-actions';
 
 const mainNavItems: NavItem[] = [
     {
         title: 'Dashboard',
         url: '/dashboard',
-        icon: LayoutGrid,
+        icon: Home,
+        size: 16,
     },
     {
-        title: 'Students',
+        title: 'Student Accounts',
         url: '/students',
-        icon: User2,
+        icon: GraduationCap,
+        size: 16,
     },
     {
         title: 'Reports',
         url: '/reports',
         icon: BarChart,
+        size: 16,
     },
 
 ];
@@ -30,7 +34,7 @@ const mainNavItems: NavItem[] = [
 const feeManagementLink: MainNavItem[] = [
     {
         title: 'Fees Management',
-        icon: Banknote,
+        icon: CircleDollarSign,
         subItems: [
              {
                 title: 'Fees Type',
@@ -64,7 +68,7 @@ const feeManagementLink: MainNavItem[] = [
             },
             {
                 title: 'Fees Reminder',
-                url: '/fee-management/fees-reminder',
+                url: '/fee-management/fees-reminders',
                 icon: Bell,
             },
         ]
@@ -73,14 +77,16 @@ const feeManagementLink: MainNavItem[] = [
 
 const footerNavItems: NavItem[] = [
     {
-        title: 'Repository',
-        url: 'https://github.com/laravel/react-starter-kit',
-        icon: MessageSquare,
-    },
-    {
         title: 'Notifications',
         url: '/notifications',
-        icon: Mail,
+        icon: BellIcon,
+        size: 16,
+    },
+    {
+        title: 'SMS/Email',
+        url: '/notifications',
+        icon: Send,
+        size: 16,
     },
 ];
 
@@ -95,6 +101,9 @@ export function AppSidebar() {
                                 <AppLogo />
                             </Link>
                         </SidebarMenuButton>
+                    </SidebarMenuItem>
+                    <SidebarMenuItem>
+                        <AppSidebarActions />
                     </SidebarMenuItem>
                 </SidebarMenu>
             </SidebarHeader>

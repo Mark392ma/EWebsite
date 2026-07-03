@@ -35,9 +35,9 @@ export default function Register() {
         <AuthLayout title="Create an account" description="Enter your details below to create your account">
             <Head title="Register" />
             <form className="flex flex-col gap-6" onSubmit={submit}>
-                <div className="grid gap-6">
-                    <div className="grid gap-2">
-                        <Label htmlFor="name">Name</Label>
+                <div className="grid gap-6 relative">
+                    <div>
+                        {/* <Label htmlFor="name">Name</Label> */}
                         <Input
                             id="name"
                             type="text"
@@ -49,12 +49,13 @@ export default function Register() {
                             onChange={(e) => setData('name', e.target.value)}
                             disabled={processing}
                             placeholder="Full name"
+                            className="w-full bg-transparent border-b-2 pb-2 text-center text-white placeholder-white outline-none"
                         />
                         <InputError message={errors.name} className="mt-2" />
                     </div>
 
                     <div className="grid gap-2">
-                        <Label htmlFor="email">Email address</Label>
+                        {/* <Label htmlFor="email">Email address</Label> */}
                         <Input
                             id="email"
                             type="email"
@@ -65,12 +66,13 @@ export default function Register() {
                             onChange={(e) => setData('email', e.target.value)}
                             disabled={processing}
                             placeholder="email@example.com"
+                            className="w-full bg-transparent border-b-2 pb-2 text-center text-white placeholder-white outline-none"
                         />
                         <InputError message={errors.email} />
                     </div>
 
                     <div className="grid gap-2">
-                        <Label htmlFor="password">Password</Label>
+                        {/* <Label htmlFor="password">Password</Label> */}
                         <Input
                             id="password"
                             type="password"
@@ -81,12 +83,13 @@ export default function Register() {
                             onChange={(e) => setData('password', e.target.value)}
                             disabled={processing}
                             placeholder="Password"
+                            className="w-full bg-transparent border-b-2 pb-2 text-center text-white placeholder-white outline-none"
                         />
                         <InputError message={errors.password} />
                     </div>
 
                     <div className="grid gap-2">
-                        <Label htmlFor="password_confirmation">Confirm password</Label>
+                        {/* <Label htmlFor="password_confirmation">Confirm password</Label> */}
                         <Input
                             id="password_confirmation"
                             type="password"
@@ -97,11 +100,12 @@ export default function Register() {
                             onChange={(e) => setData('password_confirmation', e.target.value)}
                             disabled={processing}
                             placeholder="Confirm password"
+                            className="w-full bg-transparent border-b-2 pb-2 text-center text-white placeholder-white outline-none"
                         />
                         <InputError message={errors.password_confirmation} />
                     </div>
 
-                    <Button type="submit" className="mt-2 w-full" tabIndex={5} disabled={processing}>
+                    <Button type="submit" className="px-14 py-3 border border-white/30 bg-white/5 text-white backdrop-blur-md hover:bg-white/20 transition mt-4 w-full" tabIndex={5} disabled={processing}>
                         {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
                         Create account
                     </Button>

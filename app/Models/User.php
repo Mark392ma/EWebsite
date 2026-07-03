@@ -6,11 +6,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
+
+    use HasRoles;
+
+    public function school()
+    {
+        return $this->belongsTo(School::class);
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -18,9 +26,14 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
+        'school_id',
+        'username',
         'name',
         'email',
+        'phone',
         'password',
+        'must_change_password',
+        'status',
     ];
 
     /**

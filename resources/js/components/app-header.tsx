@@ -20,6 +20,7 @@ const mainNavItems: NavItem[] = [
         title: 'Dashboard',
         url: '/dashboard',
         icon: LayoutGrid,
+        size: 16
     },
 ];
 
@@ -28,11 +29,13 @@ const rightNavItems: NavItem[] = [
         title: 'Repository',
         url: 'https://github.com/laravel/react-starter-kit',
         icon: Folder,
+        size:16,
     },
     {
         title: 'Documentation',
         url: 'https://laravel.com/docs/starter-kits',
         icon: BookOpen,
+        size: 16,
     },
 ];
 

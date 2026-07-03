@@ -14,10 +14,13 @@ return new class extends Migration
         Schema::create('fee_allocations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('student_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('fee_group_id')->nullable()->constrained()->nullOnDelete();
-            $table->foreignId('fee_type_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('fee_setup_id')->constrained()->cascadeOnDelete();
             $table->decimal('custom_amount', 10,2)->nullable();
+            $table->decimal('amount', 10,2)->nullable();
+            $table->timestamp('date_assigned')->useCurrent();
             $table->timestamps();
+
+            $table->unique('student_id', 'fee_setup_id');
         });
     }
 

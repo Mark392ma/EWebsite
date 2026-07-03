@@ -1,16 +1,14 @@
-import ReportFilters from '@/components/ReportFilters';
-import ReportSummary from '@/components/ReportSummaryCards';
-import ReportTable from '@/components/ReportTable';
+
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
 import { Tabs, TabsList } from '@/components/ui/tabs';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
 import { TabsContent, TabsTrigger } from '@radix-ui/react-tabs';
-import { AlertTriangle, CreditCard, TrendingUp } from 'lucide-react';
+import { AlertTriangle, BarChart2, CreditCard, GitGraph, Star, Table, TrendingUp, UserCheck } from 'lucide-react';
 import { useState } from 'react';
+import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -43,6 +41,19 @@ export default function Reports() {
     //const { data: collection } = useCollectionReport({ from: from || undefined, to: to || undefined })
     //const { data: outstanding } = useGetOutstandingReport();
     //const { data: summary } = useGetPaymentSummaryReport({ from: from || undefined, to: to || undefined })
+    
+    const data = [
+        { grade : "Grade 1", yellow: 4200, green: 5100 },
+        { grade : "Grade 2", yellow: 5600, green: 5900 },
+        { grade : "Grade 3", yellow: 5600, green: 6400 },
+        { grade : "Grade 4", yellow: 6150, green: 6950 },
+        { grade : "Grade 5", yellow: 6800, green: 7850 },
+        { grade : "Grade 6", yellow: 7100, green: 8600 },
+        { grade : "Grade 7", yellow: 7450, green: 9200 },
+        { grade : "Grade 8", yellow: 8530, green: 9950 },
+
+    ]
+    const currency = (value) => `$${value.toLocaleString()}`
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Reports & Analytics" />
@@ -80,6 +91,118 @@ export default function Reports() {
                     </TabsList>
 
                     <TabsContent value="collection" className='spac-y-4 mt-4'>
+                        <>
+                            <div className='bg-white rounded-2xl shadow p-6'>
+                                <div className='flex items-center justify-between mb-6'>
+                                    <div>
+                                        <h2 className='text-xl font-bold text-gray-800'>
+                                            Payments by Class and Stream
+                                        </h2>
+                                    </div>
+
+                                    <div className='flex rounded-lg border overflow-hidden'>
+                                        <button className='bg-green-200 flex items-center gap-2 text-green-800 px-4 py-2 text-sm font-bold'><BarChart2 size={18} /> Bar Chart</button>
+                                        <button className='bg-white text-gray-600 px-4 py-2 text-sm flex items-center font-bold gap-2'><Table size={16} /> Table View</button>
+                                    </div>
+                                </div>
+                                
+                                <ResponsiveContainer width="100%" height={350} >
+                                    <BarChart 
+                                        data={data}
+                                        barGap={5}
+                                        barCategoryGap="15%"
+                                    >
+                                        <CartesianGrid strokeDasharray="4 4" vertical={false} />
+                                            <XAxis dataKey="grade"/>
+                                            <YAxis tickFormatter={(value) => `${value / 100}K`} />
+                                            <Tooltip formatter={(value) => currency(value)} />
+                                            <Legend />
+
+                                            <Bar
+                                                dataKey="yellow"
+                                                name="Yellow Stream (Paid)"
+                                                fill='#FACC15'
+                                                radius={[6, 6, 0, 0]}
+                                            />
+                                            <Bar
+                                                dataKey="green"
+                                                name="Green Stream (Paid)"
+                                                fill='#22C55E'
+                                                radius={[6, 6, 0, 0]}
+                                            />
+
+                                    </BarChart>
+                                </ResponsiveContainer>
+                            </div>
+
+                            <div className='grid grid-cols-3 gap-6'>
+                                    {/* Payments Table */}
+                                    <div className="bg-white rounded-2xl col-span-2 border p-6 mt-6">
+                                        <div className='flex items-center justify-between mb-2'>
+                                        <h3 className="font-semibold text-lg">Summary by Stream</h3>
+                                        <span className='text-blue-600 text-sm font-semibold'>View All Stream</span>                
+                                        </div>
+                                        <table className="w-full">
+                                        <thead>
+                                            <tr className="text-left text-sm text-gray-500 border-b">
+                                            <th className="pb-3">Stream</th>
+                                            <th className="pb-3">Total Fees</th>
+                                            <th className="pb-3">Total Collected</th>
+                                            <th className="pb-3">Collection Rate</th>
+                                            <th className="pb-3">Outstanding Balances</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr className="border-b text-sm text-gray-500 font-bold">
+                                                <td className="py-4">Yellow</td>
+                                                <td>Ksh 32,560.00</td>
+                                                <td>Ksh 23,780.00</td>
+                                                <td>73.0%</td>
+                                                <td>Ksh 56,000.00</td>
+                                            </tr>
+                                            <tr className="border-b text-sm text-gray-500 font-bold">
+                                                <td className="py-4">Green</td>
+                                                <td>Ksh 38,890.00</td>
+                                                <td>Ksh 34,920.00</td>
+                                                <td>87.0%</td>
+                                                <td>Ksh 68,000.00</td>
+                                            </tr>
+                                            <tr className="border-b text-sm text-gray-500 font-bold">
+                                                <td className="py-4">Total</td>
+                                                <td>Ksh 76,560.00</td>
+                                                <td>Ksh 54,560.00</td>
+                                                <td>76.0%</td>
+                                                <td>Ksh 54,750.00</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                    
+                                    {/* Receipts */}
+                                    <div className="bg-white rounded-2xl border p-4 mt-6">
+                                        <div className='flex items-center justify-between'>
+                                            <h3 className="font-semibold text-lg">Quick Insight</h3>
+                                            <span className='text-blue-600 text-sm font-semibold'>View All Insight</span>                
+                                        </div>
+                                        <div className='p-2'>
+                                            <div className='flex items-center gap-4 mb-4'>
+                                                <span className='bg-green-100 rounded-lg p-2 text-green-400'><TrendingUp size={28} /></span>
+                                                <p className='text-[11px] text-[#000]'>Grade 8(Green Stream) has the highest payment with <span>Ksh. 78,000.00</span></p>
+                                            </div>
+                                            <div className='flex items-center gap-4 mb-4'>
+                                                <span className='bg-green-100 rounded-lg p-2'><Star fill='yellow' size={28} /></span>
+                                                <p className='text-[11px] text-[#000]'>Overall collection rate is <span>73.0%</span></p>
+                                            </div>
+                                            <div className='flex items-center gap-4 mb-4'>
+                                                <span className='bg-purple-100 rounded-lg p-2 text-purple-600'><UserCheck size={28} /></span>
+                                                <p className='text-[11px] text-[#000]'>Keep it up. Continue encouraging timely payments.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                          
+
+                                </>
                         {/* { collection && (
                                 <>
                                 <div className="grid grid-cols-3 gap-4">

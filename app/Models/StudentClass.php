@@ -4,11 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class StudentsClass extends Model
+
+class StudentClass extends Model
 {
+    use HasFactory;
+
     protected $table = "classes";
-    protected $fillable = ['name'];
+    protected $fillable = ['class'];
 
     public function students(): HasMany
     {
