@@ -92,6 +92,15 @@ Route::get('/', function () {
 // });
 
 Route::middleware(['auth'])->group(function () {
+    
+    Route::middleware(['role:Owner'])->prefix('owner')->group(function () {
+
+        Route::get('/dashboard', function () {
+            return inertia('owner/dashboard');
+        })->name('owner.dashboard');
+
+    });
+
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('reports', fn() => Inertia::render('reports'))->name('reports');
     Route::get('/students', [StudentsController::class, 'index'])->name('students.index');

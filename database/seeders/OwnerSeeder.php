@@ -18,8 +18,10 @@ class OwnerSeeder extends Seeder
             ['username' => 'owner'],
             [
                 'name' => 'Platform Owner',
+                'email' => 'test@gmail.com',
                 'password' => Hash::make('password'),
                 'must_change_password' => false,
+                'status' => 'active',
             ]
         );
 
